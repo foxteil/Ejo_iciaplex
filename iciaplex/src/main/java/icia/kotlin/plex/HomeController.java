@@ -36,6 +36,9 @@ public class HomeController {
 		
 		return mv;
 	}
+
+
+	
 	
 	@RequestMapping(value="/LogInform", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView logInForm() {
@@ -58,5 +61,7 @@ public class HomeController {
 		
 		return mav;
 	}
+	
+	
 	
 }
