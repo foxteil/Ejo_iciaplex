@@ -9,7 +9,11 @@
 </head>
 <body>
 <h1>
+<<<<<<< HEAD
 	${welcome}
+=======
+	${welcome }
+>>>>>>> branch 'master' of https://github.com/foxteil/Ejo_iciaplex
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
