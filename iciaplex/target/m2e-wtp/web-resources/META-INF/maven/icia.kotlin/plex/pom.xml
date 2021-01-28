@@ -140,10 +140,7 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>${org.springframework-version}</version>
 	</dependency>	
-<<<<<<< HEAD
-=======
 			
->>>>>>> branch 'master' of https://github.com/foxteil/Ejo_iciaplex
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-tx</artifactId>
