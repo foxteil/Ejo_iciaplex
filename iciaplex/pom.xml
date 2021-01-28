@@ -127,7 +127,7 @@
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc8</artifactId>
-			<version>12.0.0.0</version>
+			<version>12.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zaxxer</groupId>
@@ -140,10 +140,6 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>${org.springframework-version}</version>
 	</dependency>	
-	
-	
-
-		
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-tx</artifactId>
@@ -153,7 +149,7 @@
 	<dependency>
 		<groupId>org.projectlombok</groupId>
 		<artifactId>lombok</artifactId>
-		<version>edge-SNAPSHOT</version>
+		<version>1.18.16</version>
 		<scope>provided</scope>
 	</dependency>
 	
