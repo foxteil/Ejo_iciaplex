@@ -30,9 +30,25 @@ public class HomeController {
 		mv.addObject("welcome","스프링에 온것을 환영하다");
 		mv.addObject("serverTime", formattedDate );
 		
-		
+		mv.setViewName("home");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/LogInform", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView logInForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("loginForm");		
+		
+		return mav;
+	}
+
+	@RequestMapping(value="/LogIn", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView logIn() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("loginForm");		
+		
+		return mav;
 	}
 	
 }
