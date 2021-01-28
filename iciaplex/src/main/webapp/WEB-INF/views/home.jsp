@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%@ page contentType="text/html; charset=UTF-8" %>
+=======
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+>>>>>>> branch 'master' of https://github.com/foxteil/Ejo_iciaplex
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
