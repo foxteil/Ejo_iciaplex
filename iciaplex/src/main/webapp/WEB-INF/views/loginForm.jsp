@@ -11,10 +11,10 @@
 <input type="password" name ="mPwd" placeholder="비밀번호를 입력해주세여"/>
 <input type="button" value="서버요청" onclick="moveLogIn()" >
 <br />
-${mId }<br />
-${mPwd }<br />
-${memberId }<br />
-${memberPwd }<br />
+${member.getMId() }<br />
+${member.getMName() }<br />
+${member.getMPhone() }<br />
+
 
 </body>
 <script>
@@ -23,7 +23,7 @@ function moveLogIn(){
 	var mPwd = document.getElementsByName("mPwd")[0];
 	
 	var form = document.createElement("form");
-	form.action = "LogIn?memberInfo=" +mId.value +"&memberInfo="+mPwd.value;
+	form.action = "LogIn?ServiceCode=A";
 	form.method = "post";
 	
 	form.appendChild(mId);

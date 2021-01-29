@@ -26,10 +26,14 @@
 		
 		<!-- SqlSession 정보 -->
 		<bean id="SqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="data"/>
-		</bean>
+			<property name="dataSource" ref="data"/></bean>
+		
+		
 		
 		<mybatis-spring:scan base-package="icia.kotlin.plex"/>
+	
+		
+		
 
 		
 </beans>
