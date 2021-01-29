@@ -5,6 +5,7 @@
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<!-- 서버 가동시 문제발생시 contextConfigLocation이 문제-->
+	<!-- 프로젝트를 실행함에 있어 모든 정보는 여기에 있어 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>

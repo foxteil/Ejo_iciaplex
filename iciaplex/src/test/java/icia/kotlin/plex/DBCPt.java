@@ -38,12 +38,13 @@ public class DBCPt {
 			Connection connect = data.getConnection();
 			log.info(session);
 			log.info(connect);
-			log.info(mapper.getDate());
+			
 			log.info(mapper.getDate2());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
 
 
 }

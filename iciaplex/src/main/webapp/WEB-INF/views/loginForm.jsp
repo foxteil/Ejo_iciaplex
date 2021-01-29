@@ -13,8 +13,11 @@
 <br />
 ${mId }
 ${mPwd }<br />
-${mInfoId }
-${mInfoPwd }
+${mInfId}<br />
+${mInfNm}<br />
+${mInfPw}<br />
+${mInfPh}<br />
+
 	
 	
 </body>
@@ -24,7 +27,7 @@ function moveLogIn(){
 	var mPwd = document.getElementsByName("mPwd")[0];
 	
 	var form = document.createElement("form");
-	form.action = "LogIn?memberInfo="+mId.value+"&memberInfo="+mPwd.value;
+	form.action = "LogIn?sCode=A";
 	form.method = "post";
 	
 	form.appendChild(mId);

@@ -6,4 +6,14 @@
 	<select id="getDate2" resultType="String">
 		SELECT SYSDATE FROM DUAL
 	</select>
+	<select id="isMember" resultType="Int">
+		SELECT count(*) FROM ST WHERE ST_ID = #{mId}
+	</select>
+	<select id="isAccess" resultType="Int">
+		SELECT count(*) FROM ST WHERE ST_ID= #{mId} and ST_PASSWORD= #{mPwd}
+	</select>
+	<select id="isMInfo" resultType="icia.kotlin.plex.Member">
+		SELECT ST_ID AS mId, ST_NAME AS mNAME, ST_PASSWORD AS mPwd, ST_PHONE AS mPhone FROM ST WHERE ST_ID= #{mId} and ST_PASSWORD= #{mPwd}
+	</select>
+	
 </mapper>

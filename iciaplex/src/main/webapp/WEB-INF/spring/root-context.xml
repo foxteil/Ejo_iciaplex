@@ -12,10 +12,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!-- DB연결 정보 -->
+		<!--  이 구문 을 써놓으면 메모리에 new로 올라가 있다. -->
 		<bean id="contextInfo" class="com.zaxxer.hikari.HikariConfig">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="jdbcUrl" value="jdbc:oracle:thin:@106.243.194.230:7003:xe"/>
-			<property name="username" value="FOX"/>
+			<property name="username" value="fox"/>
 			<property name="password" value="1234"/>
 		</bean>
 		
