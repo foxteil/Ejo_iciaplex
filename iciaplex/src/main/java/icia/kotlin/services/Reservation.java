@@ -19,9 +19,9 @@ public class Reservation {
 	
 		@Autowired
 		private ReservationIF reserve;
-		
 		@Autowired
 		private PlatformTransactionManager tran;
+		
 		ModelAndView mav = new ModelAndView();
 		public ModelAndView entrance(Movie movie) {
 						

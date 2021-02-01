@@ -25,11 +25,11 @@ import icia.kotlin.services.Reservation;
 public class HomeController {
 	@Autowired
 	private Reservation reserve;
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private Authentication auth;
 	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(@ModelAttribute Movie movie) {
 		
