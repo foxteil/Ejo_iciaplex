@@ -10,6 +10,5 @@ public class Member {
 	private String mName;
 	private String mPhone;
 
-
 	}
 
