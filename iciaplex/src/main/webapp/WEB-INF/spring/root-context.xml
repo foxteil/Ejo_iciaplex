@@ -31,7 +31,12 @@
 			<property name="dataSource" ref="data"/>
 		</bean>
 		
-		<mybatis-spring:scan base-package="icia.kotlin.plex"/>
-
+		<!-- Transaction -->
+		<bean id="tran" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="data"></property>
+		</bean>
+		
+		<mybatis-spring:scan base-package="icia.kotlin.mapper"/>
+		<!-- 인터페이가 있는 패키지를 경로로 잡아줘야 한다. -->
 		
 </beans>

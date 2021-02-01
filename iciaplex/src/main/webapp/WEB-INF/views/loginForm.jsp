@@ -17,6 +17,7 @@ ${mInfId}<br />
 ${mInfNm}<br />
 ${mInfPw}<br />
 ${mInfPh}<br />
+${member}
 
 	
 	
