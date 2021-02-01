@@ -33,13 +33,11 @@ public class DBCPt {
 	@Test
 	public void connectTest() {
 		
-		SqlSession session = sqlSession.openSession();
 		try {
+			SqlSession session = sqlSession.openSession();
 			Connection connect = data.getConnection();
 			log.info(session);
 			log.info(connect);
-			log.info(mapper.getDate());
-			log.info(mapper.getDate2());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
