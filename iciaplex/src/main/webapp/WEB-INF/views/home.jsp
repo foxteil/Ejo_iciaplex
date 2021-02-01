@@ -11,7 +11,7 @@
 	${welcome }
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<P>  Now Time : ${Access } </P>
 <a href="http://192.168.200.132/LogInform">로그인 하러 가기</a>
 </body>
 </html>

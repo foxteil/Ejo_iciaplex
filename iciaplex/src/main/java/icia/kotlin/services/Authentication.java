@@ -49,15 +49,15 @@ public class Authentication {
 			if(this.isAccess(m)) {
 			    mav.addObject("member", this.getMemberInfo(m));
 				/*transaction 처리를 위한 메서드 1 : st insert*/
-			    m.setMId("tran3");
+			    m.setMId("tran5");
 			    m.setMPwd("1234");
 			    m.setMName("트랜");
-			    m.setMPhone("01087952");
+			    m.setMPhone("010587952");
 			    
 			    this.insCustomer(m);
 				/*transaction 처리를 위한 메서드 2 : mv insert*/
 			    Movie movie = new Movie();
-			    movie.setMvCode("19020103");
+			    movie.setMvCode("12354707");
 			    movie.setMvName("난리난리난리나");
 			    movie.setMvGrade("C");
 			    movie.setMvStatus("A");
@@ -114,5 +114,6 @@ public class Authentication {
     private int insMovie(Movie movie) {
     	return mapper.insMovie(movie);
 		
-	}
+    }
+
 }
