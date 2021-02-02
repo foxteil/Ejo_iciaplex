@@ -11,9 +11,9 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -23,6 +23,10 @@
 	
 	<context:component-scan base-package="icia.kotlin.plex" /><!-- homeController가 있는 경로 -->
 	<context:component-scan base-package="icia.kotlin.services" /><!-- 다음 사용할 경로들이 있는곳 -->
+	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/resources/**" location="/resources/" />
+
+
 	
 	
 </beans:beans>

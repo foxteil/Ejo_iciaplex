@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import icia.kotlin.beans.Member;
+import icia.kotlin.beans.Movie;
 import icia.kotlin.mapper.MapperIF;
 
 
@@ -29,11 +30,13 @@ public class Authentication {
 		
 	}
 	
-	public ModelAndView entrance(Member m) {
+	public ModelAndView entrance(Movie mv) {
 				
-		switch (m.getSCode()) {
+		switch (mv.getSCode()) {
 		case "A":
-			mav=LogInCtl(m);
+			//mav=LogInCtl(m);
+			
+			mav=Step2(mv);
 			break;
 
 		default:
@@ -44,6 +47,11 @@ public class Authentication {
 	
 
 	
+	private ModelAndView Step2(Movie mv) {
+		System.out.println(mv.getMvCode());
+		return null;
+	}
+
 	private ModelAndView LogInCtl(Member m) {
 			mav =new ModelAndView();
 															//DefaultTransactionDefinition : 정의 방식

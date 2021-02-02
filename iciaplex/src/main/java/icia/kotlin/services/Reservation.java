@@ -35,22 +35,73 @@ public class Reservation {
 
 		private ModelAndView MovieListCtl() {
 			ModelAndView mav = new ModelAndView();
-			ArrayList<Movie> movieList = null;
+			String movieList = new String();			
 			
-			/* AccessTime*/
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss E요일");
-			mav.addObject("Access",sdf.format(date));
 			
-			System.out.println(reserve.getMovieList().size());
-			//movieList=this.getMovieList();
+			movieList=makeHtml(reserve.getMovieList());
 			
+			mav.addObject("movieL",movieList);
 			mav.setViewName("home");
 			
-			
-			
+			System.out.println(movieList);
+					
 			return mav;
 		}
+
+		private String makeHtml(ArrayList<Movie> movieList) {
+			StringBuffer sb = new StringBuffer();
+			System.out.println("makeHtml진입");
+			 int i = 0;
+			 
+			
+			 sb.append("<div class=\"slideshow-container\">");
+		 
+			 for(i=0;i<movieList.size();i++) {
+		    	 if(i%3==0) {
+		     sb.append("<div class=\"mySlides fade\" name=\"mySlides\">");
+		     sb.append("<div class=\"numbertext\">"+i+"</div>");
+		     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
+		     sb.append("</div>");
+		    	 }
+		    	 if(i%3==1) {
+				     sb.append("<div class=\"mySlides fade\" name=\"mySlides\">");
+				     sb.append("<div class=\"numbertext\">"+i+"</div>");
+				     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
+				     sb.append("</div>");
+				    	 }
+		    	 if(i%3==2) {
+				     sb.append("<div class=\"mySlides fade\" name=\"mySlides\">");
+				     sb.append("<div class=\"numbertext\">"+i+"</div>");
+				     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
+				     sb.append("</div>");
+				    	 }
+		    	 
+		     }
+		     sb.append("</div>");
+		     
+		     sb.append("<div style=\"text-align:auto\">");
+		     for(i=0;i<movieList.size();i++) {
+			    	 if(i%3==0) {
+		      sb.append("<span class=\"dot\"></span> ");
+		      }
+			       	 if(i%3==1) {
+					      sb.append("<span class=\"dot\"></span> ");
+					      }
+			       	 if(i%3==2) {
+					      sb.append("<span class=\"dot\"></span> ");
+					      }
+			    	 
+			    	 
+		     }
+		     sb.append(" </div>");
+		   	 sb.append("</div>");	
+		   	 
+		  
+		   	 sb.append("</div>");
+			return sb.toString();
+		}
+
+
 
 //		private ArrayList<Movie> getMovieList() {
 //			

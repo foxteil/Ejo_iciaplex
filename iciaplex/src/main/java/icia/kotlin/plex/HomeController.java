@@ -47,11 +47,13 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value="/LogIn", method= { RequestMethod.POST})
-	public ModelAndView logIn(@ModelAttribute Member m) {
+	@RequestMapping(value="/Step2", method= { RequestMethod.POST})
+	public ModelAndView Step2(@ModelAttribute Movie mv) {
 		ModelAndView mav =null;
+		mv.setSCode("A");
 		
-		return mav=auth.entrance(m);
+		
+		return mav=auth.entrance(mv);
 	}
 	
 	
