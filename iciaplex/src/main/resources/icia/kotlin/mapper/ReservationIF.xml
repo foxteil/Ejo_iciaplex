@@ -27,6 +27,13 @@
 		SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'MM-dd'),'MM-dd'),'MM-dd') FROM DUAL
 		]]>
 	</select>
+	<select id="getScreen" resultType="icia.kotlin.beans.Movie"> 
+	<![CDATA[
+		SELECT * FROM DBA2.SIMV WHERE MVCODE=#{mvCode} AND DATIME LIKE #{mvDate}
+	]]>
+	</select>
+	
+	
 	
 	
 

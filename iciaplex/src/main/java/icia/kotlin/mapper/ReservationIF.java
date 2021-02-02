@@ -13,5 +13,7 @@ public interface ReservationIF {
 	public ArrayList<Movie> getMovieList2(Movie mv);
 
 	public String getDate();
+	
+	public ArrayList<Movie> getScreen(Movie mv);
 
 }

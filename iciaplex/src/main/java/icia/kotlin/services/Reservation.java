@@ -63,11 +63,33 @@ public class Reservation {
 			
 		}
 		private ModelAndView Step3(Movie mv) {
-			System.out.println(mv);
-			System.out.println(mv.getMvCode());
+			String screen = new String();
+			String add = new String();
+			add = mv.getMvDate();
+			add += "%";
+			mv.setMvDate(add);
 			
-			System.out.println(mv.getMvDate());
-			return null;
+			
+			screen = makeScreen(reserve.getScreen(mv));
+			
+			mav.addObject("screen",screen);
+			
+			mav.setViewName("screen");
+		
+			return mav;
+		}
+		private String makeScreen(ArrayList<Movie> sc) {
+			StringBuffer sb = new StringBuffer();
+			for(int i =0;i<sc.size();i++) {
+				sb.append("<input type= \"text \" readOnly value=\" MVCODE:"+sc.get(i).getMvCode() +" \" > ");
+				sb.append("<input type= \"text \" readOnly value=\" MVNAME:"+sc.get(i).getMvName() +" \" > ");
+				sb.append("<input type= \"text \" readOnly value=\" MVGRADE:"+sc.get(i).getMvGrade() +" \" > ");
+				sb.append("<input type= \"text \" readOnly value=\" MVSCREEN:"+sc.get(i).getMvSCREEN() +" \" > ");
+				sb.append("<input type= \"text \" readOnly value=\" DATIME:"+sc.get(i).getDATIME()+" \" > ");
+			}
+			
+			
+			return sb.toString();
 		}
 		private ModelAndView Step2(Movie mv) {
 			System.out.println(mv.getMvCode());
