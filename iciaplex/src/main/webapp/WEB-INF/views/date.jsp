@@ -24,4 +24,27 @@ ${poster }
 
 
 </body>
+<script>
+function DateClick(date){
+	
+	var dates = date.value.split(":");
+	
+	var mvcode= document.getElementsByName("mvcode")[0].value;
+	var date = dates[0];
+
+	var form = document.createElement("form");
+	form.action = "Step3?mvCode="+mvcode+"&mvDate="+date;
+	form.method = "post";
+	document.body.appendChild(form);
+	
+	form.submit();
+	
+	
+}
+
+</script>
+
+
+
+
 </html>

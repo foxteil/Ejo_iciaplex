@@ -47,6 +47,12 @@ public class Reservation {
 				
 				mav=Step2(mv);
 				break;
+				
+			case "S3":
+				//mav=LogInCtl(m);
+				
+				mav=Step3(mv);
+				break;
 			
 			default :
 				
@@ -55,6 +61,13 @@ public class Reservation {
 
 			return mav;
 			
+		}
+		private ModelAndView Step3(Movie mv) {
+			System.out.println(mv);
+			System.out.println(mv.getMvCode());
+			
+			System.out.println(mv.getMvDate());
+			return null;
 		}
 		private ModelAndView Step2(Movie mv) {
 			System.out.println(mv.getMvCode());
@@ -71,7 +84,7 @@ public class Reservation {
 			return mav;
 		}
 		 private ArrayList<String> nextDate() throws ParseException {
-			  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd E요일");
+			  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd:E요일");
 			  ArrayList<String> al= new ArrayList<>();
 			  Calendar c = Calendar.getInstance ( );
 			  
@@ -83,13 +96,12 @@ public class Reservation {
 			   return al;
 			 }
 
-			
 		
 
 		private String makeDate(ArrayList<String> al) {
 			StringBuffer sb = new StringBuffer();
 			for(int i=0;i<7;i++) {
-			sb.append("<input type=\"button\" value=\""+al.get(i)+"\"  class=\"test\" >");
+			sb.append("<input type=\"button\" value=\""+al.get(i)+"\"  class=\"test\" onClick=\"DateClick(this)\">");
 			
 			}
 			
@@ -99,23 +111,18 @@ public class Reservation {
 			StringBuffer sb = new StringBuffer();
 			
 			sb.append("<div> ");
-			sb.append("<div style=\"float: left\">");
+			sb.append("<div style=\"float: left\" >");
 			sb.append("<img src=resources/img/"+movieList2.get(0).getMvImage()+" style=\"width:30%\">");
 			sb.append("</div>");
-			sb.append("<div style=\"float: left \">");
+			sb.append("<div style=\"float: left \" >");
 			sb.append(makeDate(al));
 			sb.append("</div>");
-			
-			
 			sb.append("<br>");
 			sb.append("<button>"+movieList2.get(0).getMvGrade()+"</button>");
 			sb.append("<button>"+movieList2.get(0).getMvName()+"</button>");;
 			sb.append("</n>");
 			sb.append("</div>");
-			
-			
-			
-			
+			sb.append("<input type=\"hidden\" name=\"mvcode\" value=\""+movieList2.get(0).getMvCode()+"\">");			
 			return sb.toString();
 		}
 		

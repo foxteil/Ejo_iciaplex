@@ -55,7 +55,14 @@ public class HomeController {
 		
 		return mav=reserve.entrance(mv);
 	}
-	
+	@RequestMapping(value="/Step3", method= { RequestMethod.POST})
+	public ModelAndView Step3(@ModelAttribute Movie mv) {
+		ModelAndView mav =null;
+		mv.setSCode("S3");
+		
+		
+		return mav=reserve.entrance(mv);
+	}
 	
 	
 }
