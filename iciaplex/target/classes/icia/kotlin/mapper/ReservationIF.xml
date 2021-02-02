@@ -15,6 +15,20 @@
 		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E'
 	]]>
 	</select>
+	
+	<select id="getMovieList2" resultType="icia.kotlin.beans.Movie"> 
+	<![CDATA[
+		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E' 
+		 AND MV_CODE= #{mvCode}
+	]]>
+	</select>
+	<select id="getDate" resultType="String">
+	<![CDATA[
+		SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'MM-dd'),'MM-dd'),'MM-dd') FROM DUAL
+		]]>
+	</select>
+	
+	
 
 
 </mapper>

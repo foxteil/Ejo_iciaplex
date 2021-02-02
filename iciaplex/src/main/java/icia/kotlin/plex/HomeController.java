@@ -34,7 +34,7 @@ public class HomeController {
 	public ModelAndView home(@ModelAttribute Movie movie) {
 		
 		ModelAndView mav = null;
-			
+		movie.setSCode("H");	
 		mav = reserve.entrance(movie);
 		return mav;
 	}
@@ -50,10 +50,10 @@ public class HomeController {
 	@RequestMapping(value="/Step2", method= { RequestMethod.POST})
 	public ModelAndView Step2(@ModelAttribute Movie mv) {
 		ModelAndView mav =null;
-		mv.setSCode("A");
+		mv.setSCode("S2");
 		
 		
-		return mav=auth.entrance(mv);
+		return mav=reserve.entrance(mv);
 	}
 	
 	

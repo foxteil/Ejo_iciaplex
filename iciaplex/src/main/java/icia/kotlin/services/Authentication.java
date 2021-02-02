@@ -1,6 +1,8 @@
 package icia.kotlin.services;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -13,11 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 import icia.kotlin.beans.Member;
 import icia.kotlin.beans.Movie;
 import icia.kotlin.mapper.MapperIF;
+import icia.kotlin.mapper.ReservationIF;
 
 
 @Service
 public class Authentication {
 	ModelAndView mav = null;
+	
+	@Autowired
+	private ReservationIF reserve;
 	
 	@Autowired
 	private MapperIF mapper;
@@ -36,7 +42,7 @@ public class Authentication {
 		case "A":
 			//mav=LogInCtl(m);
 			
-			mav=Step2(mv);
+			//mav=Step2(mv);
 			break;
 
 		default:
@@ -47,10 +53,7 @@ public class Authentication {
 	
 
 	
-	private ModelAndView Step2(Movie mv) {
-		System.out.println(mv.getMvCode());
-		return null;
-	}
+
 
 	private ModelAndView LogInCtl(Member m) {
 			mav =new ModelAndView();

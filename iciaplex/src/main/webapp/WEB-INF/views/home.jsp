@@ -10,7 +10,7 @@
 <style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
+.mySlides, .mySlides2, .mySlides3 {display: none;}
 img {vertical-align: middle;}
 
 /* Slideshow container */
@@ -41,7 +41,7 @@ img {vertical-align: middle;}
 }
 
 /* The dots/bullets/indicators */
-.dot {
+.dot, .dot2, .dot3 {
   height: 15px;
   width: 15px;
   margin: 0 2px;
@@ -97,17 +97,29 @@ showSlides();
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
+  var slides2 = document.getElementsByClassName("mySlides2");
+  var slides3 = document.getElementsByClassName("mySlides3");
   var dots = document.getElementsByClassName("dot");
+  var dots2 = document.getElementsByClassName("dot2");
+  var dots3 = document.getElementsByClassName("dot3");
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
+    slides2[i].style.display = "none";
+    slides3[i].style.display = "none";
   }
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}    
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
+    dots2[i].className = dots2[i].className.replace(" active", "");
+    dots3[i].className = dots3[i].className.replace(" active", "");
   }
   slides[slideIndex-1].style.display = "block";  
+  slides2[slideIndex-1].style.display = "block";
+  slides3[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
+  dots2[slideIndex-1].className += " active";
+  dots3[slideIndex-1].className += " active";
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
