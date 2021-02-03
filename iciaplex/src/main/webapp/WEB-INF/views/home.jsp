@@ -107,7 +107,7 @@ color:#ffffff;
 </head>
 <body>
 
-	<a href="http://192.168.0.107/LogInform" >로그인폼 이동</a><br />
+	<a href="http://192.168.35.195/LogInform" >로그인폼 이동</a><br />
 	
 	<p> ${movieL }</p>
 	<p>now time ${Access }</p>

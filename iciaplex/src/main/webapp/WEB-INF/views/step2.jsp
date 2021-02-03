@@ -8,7 +8,7 @@
 
 </head>
 <body onLoad="init()">
-	<a href="http://192.168.0.107/LoginForm" >로그인폼 이동</a><br />
+	<a href="http://192.168.35.195/LoginForm" >로그인폼 이동</a><br />
 	
 	<P>  Now Time : ${Access} </P>
 	
@@ -72,18 +72,21 @@ function init(){
 	movieInfo.appendChild(mvComments);
 }
 
-function divClick(mvCode,day){
+function divClick(mvCode,date){
 	//서버전송
+	let dat = date.split("-");
+	let mvdate = dat[0]+dat[1]+dat[2];
 	
-	
-	alert(mvCode +":"+ day);
-// 	let form = document.createElement("form");
-// 	form.action = "Step2?sCode=Step2&mvCode=" + mvCode;
-// 	form.method = "post"
-	
-// 	document.body.appendChild(form);
-// 	form.submit();
-}
+	let request = new XMLHttpRequest();
+	 request.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status ==200){
+			//let jsonData = decodeURIComponent(reqeust.response);
+			alert("서버 왔다감");
+		}
+	};
+	request.open("POST","Step3?sCode=S3&iCode=j&mvCode="+mvCode+"&mvDate="+mvdate,true);
+	request.send();
+	}
 	
 </script>
 </html>

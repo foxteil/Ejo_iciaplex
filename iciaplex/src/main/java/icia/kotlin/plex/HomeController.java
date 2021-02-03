@@ -59,9 +59,9 @@ public class HomeController {
 	public ModelAndView Step3(@ModelAttribute Movie mv) {
 		ModelAndView mav =null;
 		mv.setSCode("S3");
-		
-		
-		return mav=reserve.entrance(mv);
+		mav=reserve.entrance(mv);
+		System.out.println(mav.getModel().get("screen"));
+		return mav;
 	}
 	
 	

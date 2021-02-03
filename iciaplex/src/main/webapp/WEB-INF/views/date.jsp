@@ -33,7 +33,7 @@ function DateClick(date){
 	var date = dates[0];
 
 	var form = document.createElement("form");
-	form.action = "Step3?mvCode="+mvcode+"&mvDate="+date;
+	form.action = "Step3?sCode=S2&iCode=b&mvCode="+mvcode+"&mvDate="+date;
 	form.method = "post";
 	document.body.appendChild(form);
 	

@@ -70,13 +70,22 @@ public class Reservation {
 			add = mv.getMvDate();
 			add += "%";
 			mv.setMvDate(add);
+			System.out.println(mv);
 			
-			
-			screen = makeScreen(reserve.getScreen(mv));
-			
-			mav.addObject("screen",screen);
+			if(mv.getICode().equals("b")) {
+				screen = makeScreen(reserve.getScreen(mv));
+				
+				mav.addObject("screen",screen);
+				System.out.println("in Step3"+screen);
+				
+			}else if(mv.getICode().equals("j")) {
+				String jsonData = gson.toJson(reserve.getScreen(mv));
+				System.out.println(jsonData);
+				mav.addObject("screen",jsonData);
+			}
 			
 			mav.setViewName("screen");
+			
 		
 			return mav;
 		}
@@ -110,6 +119,7 @@ public class Reservation {
 
 				/* Movie Info & Convert to Json */
 				String jsonData = gson.toJson(reserve.getMovieList2(mv));
+				System.out.println(jsonData);
 				mav.addObject("movieData", jsonData);
 
 				/* view */
