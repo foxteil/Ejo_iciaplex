@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import com.zaxxer.hikari.util.ConcurrentBag;
 
@@ -30,7 +31,8 @@ public class Reservation {
 		private ReservationIF reserve;
 		@Autowired
 		private PlatformTransactionManager tran;
-		
+		@Autowired
+		private Gson gson;
 		
 		public ModelAndView entrance(Movie mv) {
 						
@@ -92,20 +94,32 @@ public class Reservation {
 			return sb.toString();
 		}
 		private ModelAndView Step2(Movie mv) {
-			System.out.println(mv.getMvCode());
-			String poster = new String();
-			
-			poster=makePoster(reserve.getMovieList2(mv), this.nextDate());
-			
-			String date = makeDate(this.nextDate());		
-		
-		
-			mav.addObject("poster",poster);
-			
-			mav.setViewName("date");
+
+			if (mv.getICode().equals("b")) {
+				String poster = new String();
+				poster = makePoster(reserve.getMovieList2(mv), this.nextDate());
+				// String date = makeDate(this.nextDate());
+
+				mav.addObject("poster", poster);
+				mav.setViewName("date");
+
+			} else {
+
+				/* Start Date */
+				mav.addObject("Access", this.getCurrentDate('d'));
+
+				/* Movie Info & Convert to Json */
+				String jsonData = gson.toJson(reserve.getMovieList2(mv));
+				mav.addObject("movieData", jsonData);
+
+				/* view */
+				mav.setViewName("step2");
+
+			}
+
 			return mav;
 		}
-		 private ArrayList<String> nextDate() throws ParseException {
+		 private ArrayList<String> nextDate() {
 			  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd:E요일");
 			  ArrayList<String> al= new ArrayList<>();
 			  Calendar c = Calendar.getInstance ( );
@@ -153,14 +167,20 @@ public class Reservation {
 			ModelAndView mav = new ModelAndView();
 			String movieList = new String();			
 			
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E요일");
+			mav.addObject("Access",sdf.format(date));
 			
+			Gson gson = new Gson(); 
+			String jsonData =gson.toJson(reserve.getMovieList());
+			mav.addObject("jsonData",jsonData);
+			
+			//System.out.println(jsonData);
+					
 			movieList=makeHtml(reserve.getMovieList());
-			
 			mav.addObject("movieL",movieList);
 			mav.setViewName("home");
 			
-			System.out.println(movieList);
-					
 			return mav;
 		}
 
@@ -170,77 +190,51 @@ public class Reservation {
 			 int i = 0;
 			 		 
 			 sb.append("<div class=\"slideshow-container\">");
-			 
-		 	 for(i=0;i<movieList.size();i++) {
-		    	 if(i%3==0) {
-		     sb.append("<div class=\"mySlides fade\" name=\"mySlides\">");
-		     
-		     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
-		     sb.append("</div>");
-		    	 }
-		     }
-		     sb.append("</div>");
-		     sb.append("<div style=\"text-align:auto\">");
-		     for(i=0;i<movieList.size();i++) {
-			    	 if(i%3==0) {
-	         sb.append("<span class=\"dot\"></span> ");
-			    	 }
-		     }
-		     sb.append(" </div>");
-		   	 sb.append("</div>");	
-		   	 sb.append("</div>");
+	          
+	           for(i=0;i<movieList.size();i++) {
+	              if(i%3==0) {sb.append("<div class=\"mySlides fade\" name=\"mySlides\">");}
+	           sb.append("<div class=\"poster\">");
+	           sb.append("<div class=\"comment\">"+"영화제목 :"+ movieList.get(i).getMvName()+"<br/>"
+	                                      +"코멘트 :"+movieList.get(i).getMvComments()+"<br/>"
+	                                      +"코멘트 :"+movieList.get(i).getMvComments()+"<br/>"
+	                                      +"상영중 :"+movieList.get(i).getMvStatus()+ "<br/>"
+	                                      +"등급 : "+movieList.get(i).getMvGrade()+ "</div>");
+	           sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+"  onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
+	           sb.append("</div>");
+	           
+	           if(i%3 == 2) { sb.append("</div>");}
+	            }
+	         if(i%3 !=2) {sb.append("</div>"); }
+	         
+	           sb.append("</div></div>");
+	           sb.append("<div class=\"dots\">");
+	           for(i=0;i<movieList.size();i++) {
+	              //if(i%3==0) {
+	              sb.append("<span class=\"dot\" onclick=\"currentSlide("+i+")\"></span> ");
+	              //}
+	           }
+	           sb.append("</div>");
+	           sb.append("<a class=\"prev\" onclick=\"plusSlides(-1)\">&#10094;</a>");
+	           sb.append("<a class=\"next\" onclick=\"plusSlides(1)\">&#10095;</a>");
+	           
+	          sb.append("</div>");
 		   	 
-		   	 ///////////////////////////////////////////////////////////////
-		   	 
-		   	
-		 	 for(i=1;i<movieList.size();i++) {
-		    	 if(i%3==1) {
-		     sb.append("<div class=\"mySlides2 fade\" >");
-		     
-		     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
-		     sb.append("</div>");
-		    	 }
-		     }
-		     sb.append("</div>");
-		     sb.append("<div style=\"text-align:auto\">");
-		     for(i=1;i<movieList.size();i++) {
-			    	 if(i%3==1) {
-	         sb.append("<span class=\"dot2\"></span> ");
-			    	 }
-		     }
-		     sb.append(" </div>");
-		   	 sb.append("</div>");	
-		   	 
-		   	 //////////////////////////////////////////////////////////////////
-		   	 
-		   	
-		 	 for(i=2;i<movieList.size();i++) {
-		    	 if(i%3==2) {
-		     sb.append("<div class=\"mySlides3 fade\" >");
-		    
-		     sb.append("<img src=resources/img/"+movieList.get(i).getMvImage()+" style=\"width:30%\" onClick=\"movieClick("+movieList.get(i).getMvCode()+")\" >");
-		     sb.append("</div>");
-		    	 }
-		     }
-		     sb.append("</div>");
-		     sb.append("<div style=\"text-align:auto\">");
-		     for(i=2;i<movieList.size();i++) {
-			    	 if(i%3==2) {
-	         sb.append("<span class=\"dot3\"></span> ");
-			    	 }
-		     }
-		     sb.append(" </div>");
-		   	 sb.append("</div>");
-		   	
-		   	 sb.append("</div>");
-		   	 
-		   	
-		   	 
+
 		   	 
 			return sb.toString();
 		}
 
 
+		private String getCurrentDate(char dateType) {
+			Date date = new Date();
+			
+			SimpleDateFormat sdf = (dateType == 'f')? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E요일"):
+				(dateType=='d')? new SimpleDateFormat("yyyy-MM-dd"):
+						(dateType=='t')? new SimpleDateFormat("HH:mm E요일"): null;
+						
+		return sdf.format(date);
+		}
+		
 
 //		private ArrayList<Movie> getMovieList() {
 //			

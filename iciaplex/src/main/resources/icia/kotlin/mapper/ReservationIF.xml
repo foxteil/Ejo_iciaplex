@@ -13,6 +13,9 @@
 	<select id="getMovieList" resultType="icia.kotlin.beans.Movie"> 
 	<![CDATA[
 		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E'
+	
+	
+	
 	]]>
 	</select>
 	
@@ -20,6 +23,10 @@
 	<![CDATA[
 		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E' 
 		 AND MV_CODE= #{mvCode}
+	
+	
+	
+	
 	]]>
 	</select>
 	<select id="getDate" resultType="String">

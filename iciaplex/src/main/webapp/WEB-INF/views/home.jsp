@@ -1,23 +1,29 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Home</title>
-<style>
+	<style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif;}
-.mySlides, .mySlides2, .mySlides3 {display: none;}
-img {vertical-align: middle;}
+.mySlides {display: none;
+ text-align:center;
+			
+			}
+img {vertical-align: middle;
+	cursor:pointer;
+	width: 300px;
+	height: 500px;
+	
+	}
 
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
-  position: relative;
-  margin: auto;
+
+  
 }
 
 /* Caption text */
@@ -41,7 +47,7 @@ img {vertical-align: middle;}
 }
 
 /* The dots/bullets/indicators */
-.dot, .dot2, .dot3 {
+.dot{
   height: 15px;
   width: 15px;
   margin: 0 2px;
@@ -77,63 +83,109 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
+.comment{
+    background: #000000;
+    opacity: 0;
+    width: 300px;
+    height: 500px;
+    position: relative;
+    bottom: -2%;
+    z-index: 1;
+}
+
+.poster:hover .comment{
+opacity:0.5;
+text-align:center;
+color:#ffffff;
+}
+#movieZone{
+   position: absolute;
+    left: 16%;
+}
+
 </style>
-	
 </head>
 <body>
- 
 
-<p> ${movieL }</p>
+	<a href="http://192.168.0.107/LogInform" >로그인폼 이동</a><br />
+	
+	<p> ${movieL }</p>
+	<p>now time ${Access }</p>
+	<section id="movieZone"></section>
+</body>
+<script> 
+	let dayStr = "${Access}";
+	
+	let day = (dayStr.split(" "))[0].split("-");
+	let now = new Date();
+	now.setFullYear(parseInt(day[0]), parseInt(day[1])-1, parseInt(day[2]));
+	
+	let section = document.getElementById("movieZone");
+	let movieList = JSON.parse('${jsonData}');
+	let record = parseInt(movieList.length/5);
+	record = (movieList.length%5 > 0)? record + 1: record;
+	for(rIndex=0; rIndex < record; rIndex++){
+		let div = document.createElement('Div');
+		div.style.display = "inline-flex";
+		div.setAttribute("name", "line");
+		section.appendChild(div);
+	}
+
+	for(index=0; index < movieList.length; index++){
+		let rDivIndex = parseInt(index/5);
+		let mvDiv = document.createElement('Div');
+		mvDiv.style.width = "140px";
+		mvDiv.style.height = "200px";
+		mvDiv.style.margin = "0px 10px 20px 0px";  
+											
+		mvDiv.style.backgroundImage = "url(/resources/img/" + movieList[index].mvImage + ")"
+		mvDiv.style.backgroundSize = "contain";
+		mvDiv.style.cursor = "pointer";
+		let mvCode = movieList[index].mvCode;
+		mvDiv.addEventListener('click', function(){divClick(mvCode);});
+		let line = document.getElementsByName("line")[rDivIndex];
+		line.appendChild(mvDiv);
+		
+	}
+	
+function divClick(mvCode){
+	//서버전송
+	var form = document.createElement("form");
+	form.action = "Step2?mvCode="+mvCode+"&iCode=j";
+	form.method = "post";
+	document.body.appendChild(form);
+	
+	form.submit();
+	
+}
 
 
-
-
-<a href="http://192.168.0.107/LogInform">로그인 하러 가기</a>
-
-<script type="text/javascript">
 var slideIndex = 0;
 showSlides();
 
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
-  var slides2 = document.getElementsByClassName("mySlides2");
-  var slides3 = document.getElementsByClassName("mySlides3");
-  var dots = document.getElementsByClassName("dot");
-  var dots2 = document.getElementsByClassName("dot2");
-  var dots3 = document.getElementsByClassName("dot3");
+
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
-    slides2[i].style.display = "none";
-    slides3[i].style.display = "none";
   }
   slideIndex++;
+  
   if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-    dots2[i].className = dots2[i].className.replace(" active", "");
-    dots3[i].className = dots3[i].className.replace(" active", "");
-  }
   slides[slideIndex-1].style.display = "block";  
-  slides2[slideIndex-1].style.display = "block";
-  slides3[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  dots2[slideIndex-1].className += " active";
-  dots3[slideIndex-1].className += " active";
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
 	
 function movieClick(mCode){
 	var form = document.createElement("form");
-	form.action = "Step2?mvCode="+mCode;
+	form.action = "Step2?mvCode="+mCode+"&iCode=b";
 	form.method = "post";
 	document.body.appendChild(form);
 	
 	form.submit();
 }
+	
 </script>
-</body>
-
-
 </html>
