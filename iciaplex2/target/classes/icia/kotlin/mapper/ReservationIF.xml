@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 구현체 -->
+
+
+<mapper namespace="icia.kotlin.mapper.ReservationIF">
+	<!-- resultType를 Bean에 맞게 잡아준다면 알아서 그 추상메서드에 맞게 잘 들어가 준다.-->	
+	
+	<!-- QUERY에 포함된 문자 중 <> & || 등 이 있다면 XML 파싱을 하지 않도록 -->
+	<!-- [CDATA[ 안에 있는 것들은 전부 문자처리를 해주어 버리겠다. ]] -->
+	<select id="getMovieList" resultType="icia.kotlin.beans.Movie"> 
+	<![CDATA[
+		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E'
+	]]>
+	</select>
+	
+	<select id="getMovieList2" resultType="icia.kotlin.beans.Movie"> 
+	<![CDATA[
+		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E' 
+		 AND MV_CODE= #{mvCode}
+	]]>
+	</select>
+	<select id="getDate" resultType="String">
+	<![CDATA[
+		SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'MM-dd'),'MM-dd'),'MM-dd') FROM DUAL
+		]]>
+	</select>
+	<select id="getScreen" resultType="icia.kotlin.beans.Movie"> 
+	<![CDATA[
+		SELECT * FROM DBA2.SIMV WHERE MVCODE=#{mvCode} AND DATIME LIKE #{mvDate}
+	]]>
+	</select>
+	
+	
+	
+	
+
+
+</mapper>
