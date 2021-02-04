@@ -62,7 +62,7 @@ public class HomeController {
 	@ResponseBody
 	public String Step3(@ModelAttribute Movie mv) throws UnsupportedEncodingException {
 		ModelAndView mav =null;
-		System.out.println(mv);
+		
 		 mav = reserve.entrance(mv);
 		 System.out.println(mav.getModel().get("screen"));
 		
@@ -73,7 +73,7 @@ public class HomeController {
 	@RequestMapping(value="/Step4", method= { RequestMethod.POST})
 	public ModelAndView Step4(@ModelAttribute Movie mv) {
 		ModelAndView mav =null;
-		System.out.println(mv.getSCode());
+		
 		mav=reserve.entrance(mv);
 		return mav=reserve.entrance(mv);
 	}

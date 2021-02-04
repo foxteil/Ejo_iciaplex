@@ -107,13 +107,13 @@ function divClick(mvCode, date){
 	     	
 	     	
 	     	let scData = time[i].mvCode+ ":"
-	     		+ (time[i].mvSCREEN).substring(0,1) + ":"
+	     		+ (time[i].mvSCREEN)+ ":"
 	     		+ time[i].DATIME;
 	     	
 	     	
 	     	let mvScreen = document.createElement('Div');
 
-	     	mvScreen.textContent = Gr +"["+time[i].mvSCREEN.substring(0,1)+"상영관] " + Ti;
+	     	mvScreen.textContent = Gr +"["+time[i].mvSCREEN+"상영관] " + Ti;
 	     	mvScreen.style.cursor="pointer";
 	     	mvScreen.addEventListener('click',function(){send(scData);});
 	     	mvScreen.className = "time";

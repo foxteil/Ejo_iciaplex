@@ -67,10 +67,9 @@ public class Reservation {
 		 private ModelAndView Step4(Movie mv) {
 			 mv.setMvThCode("1");
 			 ModelAndView mav = new ModelAndView();
-			 System.out.println(mv.getMvCode());
-			 System.out.println(mv.getMvThCode());
 			 System.out.println(mv.getMvSCREEN());
-			 System.out.println(mv.getDATIME());
+			
+			
 			 
 			 mav.addObject("Access", this.getCurrentDate('f'));
 			 mav.setViewName("step4");
@@ -80,7 +79,7 @@ public class Reservation {
 		private ModelAndView Step3(Movie mv) {
 	         String screen = new String();
 	         String add = new String();
-	         System.out.println(mv.getMvDate());
+	       
 	         add = mv.getMvDate();
 	         add += "%";
 	         mv.setMvDate(add);
