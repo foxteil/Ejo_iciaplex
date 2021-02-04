@@ -59,14 +59,23 @@ public class HomeController {
 		return mav=reserve.entrance(mv);
 	}
 	@RequestMapping(value="/Step3", method= { RequestMethod.POST})
-	public ModelAndView Step3(@ModelAttribute Movie mv) throws UnsupportedEncodingException {
+	@ResponseBody
+	public String Step3(@ModelAttribute Movie mv) throws UnsupportedEncodingException {
 		ModelAndView mav =null;
-
+		System.out.println(mv);
 		 mav = reserve.entrance(mv);
 		 System.out.println(mav.getModel().get("screen"));
-		 URLEncoder.encode(mav.getModel().get("screen").toString(), "UTF-8");
-		 return mav;
+		
+		 return URLEncoder.encode(mav.getModel().get("screen").toString(), "UTF-8");
 	}
 	
+	
+	@RequestMapping(value="/Step4", method= { RequestMethod.POST})
+	public ModelAndView Step4(@ModelAttribute Movie mv) {
+		ModelAndView mav =null;
+		System.out.println(mv.getSCode());
+		mav=reserve.entrance(mv);
+		return mav=reserve.entrance(mv);
+	}
 	
 }

@@ -90,35 +90,31 @@ function divClick(mvCode, date){
 	         
 	        let timeList = document.getElementById("selectionTime");
 	        let time = JSON.parse(jsonData);
-	        
-	       
 	     
 	        for(let i=0; i<time.length; i++){
-	        	
-	     	let Gr = ((time[i].mvGrade=="A")? "전체이용가" :
-                	((time[i].mvGrade=="C")? "12세이용가" :
-                    ((time[i].mvGrade=="Y")? "15세이용가" : ("청소년관람불가"))));
-	    
 
-	     	let Ti = "상영시간: " + time[i].DATIME.substring(8,10)
+	        let mvScreen = document.createElement('Div');
+	        mvScreen.textContent = time[i].mvSCREEN.substring(0,1)+"상영관";
+	        mvScreen.className = "time";
+	        timeList.appendChild(mvScreen);
+	        	
+	     	let mvGrade = document.createElement('Div');              
+	     	mvGrade.textContent = ((time[i].mvGrade=="A")? "전체이용가" :
+                									((time[i].mvGrade=="C")? "12세이용가" :
+                    						((time[i].mvGrade=="Y")? "15세이용가" : ("청소년관람불가"))));
+	     	mvGrade.className = "time";
+	     	timeList.appendChild(mvGrade);
+
+	     	let mvDATIME = document.createElement('Div');              
+	     	mvDATIME.textContent = "상영시간: " + time[i].DATIME.substring(8,10)
 	     		+((time[i].DATIME.substring(11,12)==0)? "시" : ":")
 	     		+ ((time[i].DATIME.substring(11,12)==0)? "" :
 	     			(time[i].DATIME.substring(10,12)));
-	     	
-	     	
-	     	let scData = time[i].mvCode+ ":"
-	     		+ (time[i].mvSCREEN).substring(0,1) + ":"
-	     		+ time[i].DATIME;
-	     	
+	     	mvDATIME.className = "time";
+	     	timeList.appendChild(mvDATIME);
 	     	
 	     	let mvScreen = document.createElement('Div');
-
-	     	mvScreen.textContent = Gr +"["+time[i].mvSCREEN.substring(0,1)+"상영관] " + Ti;
-	     	mvScreen.style.cursor="pointer";
-	     	mvScreen.addEventListener('click',function(){send(scData);});
-	     	mvScreen.className = "time";
-
-		    timeList.appendChild(mvScreen);
+	     	mvScreen.textContent
 		}
 		}
 	};
@@ -128,19 +124,6 @@ function divClick(mvCode, date){
 	request.send("iCode=j&sCode=S3&mvCode="+mvCode+"&mvDate="+date);
 
    
-	}
-	
-	
-	function send(scData){
-		alert(scData);
-		   let step4 = scData.split(":");
-		   
-		   var form = document.createElement("form");
-		   form.action = "Step4?sCode=S4&mvCode="+step4[0]+"&mvSCREEN="+step4[1]+"&DATIME="+step4[2]+"&iCode=q";
-		   form.method = "post";
-		   document.body.appendChild(form);
-		   
-		   form.submit();
 	}
 
 </script>

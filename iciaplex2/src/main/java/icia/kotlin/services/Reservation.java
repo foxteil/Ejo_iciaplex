@@ -40,22 +40,21 @@ public class Reservation {
 			
 			switch (mv.getSCode()) {
 			case "H":
-				//mav=LogInCtl(m);
-				
 				mav = MovieListCtl();
 				break;
 			
 			case "S2":
-				//mav=LogInCtl(m);
-				
 				mav=Step2(mv);
 				break;
 				
 			case "S3":
-				//mav=LogInCtl(m);
-				
 				mav=Step3(mv);
 				break;
+			
+			case "S4":
+				mav=Step4(mv);
+				break;
+				
 			
 			default :
 				
@@ -65,7 +64,20 @@ public class Reservation {
 			return mav;
 			
 		}
-		 private ModelAndView Step3(Movie mv) {
+		 private ModelAndView Step4(Movie mv) {
+			 mv.setMvThCode("1");
+			 ModelAndView mav = new ModelAndView();
+			 System.out.println(mv.getMvCode());
+			 System.out.println(mv.getMvThCode());
+			 System.out.println(mv.getMvSCREEN());
+			 System.out.println(mv.getDATIME());
+			 
+			 mav.addObject("Access", this.getCurrentDate('f'));
+			 mav.setViewName("step4");
+			return mav;
+		}
+		 
+		private ModelAndView Step3(Movie mv) {
 	         String screen = new String();
 	         String add = new String();
 	         System.out.println(mv.getMvDate());
@@ -94,6 +106,7 @@ public class Reservation {
 	         return mav;
 	      }
 		 
+		 //select seat
 		 
 		
 		 
@@ -204,17 +217,7 @@ public class Reservation {
 		}
 
 		
-//	private ModelAndView getScreen(Movie mv) {
-//	 ModelAndView mav = new ModelAndView();
-//	 
-//	 mav.addObject("Access", this.getCurrentDate('d'));
-//	 
-//	 String jsonData = gson.toJson(this.getScreen(mv));
-//	 mav.addObject("ScreeningData", jsonData);
-//	 System.out.println(jsonData);
-//	 
-//	 return mav;
-//		 }
+
 		
 		
 		private String makeHtml(ArrayList<Movie> movieList) {

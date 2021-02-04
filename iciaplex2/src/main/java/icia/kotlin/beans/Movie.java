@@ -15,4 +15,6 @@ public class Movie {
 	private String mvDate;
 	private String DATIME;
 	private String mvSCREEN;
+	private String mvThCode; //step4를 위해 추가
+	
 }
