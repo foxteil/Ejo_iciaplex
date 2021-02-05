@@ -5,6 +5,18 @@
 <html>
 <head>
 	<title>Home</title>
+<style>
+	img {
+    width: 25px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items : center;
+    right: 13%;
+    bottom: -20px;
+}
+</style>
+
 </head>
 <body onLoad="init()">
 	<a href="http://192.168.200.132/LoginForm" >로그인폼 이동</a><br />
@@ -12,8 +24,8 @@
 	
 	<section id="movieZone" style="display:flex;">
 		<div id="movieInfo"></div>
-		<div id="selectionDate">selectionDate</div>
-		<div id="selectionTime">selectionTime</div>
+		<div id="selectionDate" style="margin:15px">selectionDate</div>
+		<div id="selectionTime" style="margin:15px">selectionTime</div>
 	</section>
 </body>
 <script>
@@ -42,8 +54,8 @@ function init(){
 	let movie = JSON.parse('${movieData}');
 	
 	let mvImage = document.createElement('Div');
-	mvImage.style.width = "150px";
-	mvImage.style.height = "300px";
+	mvImage.style.width = "140px";
+	mvImage.style.height = "200px";
 	mvImage.style.margin = "0px 10px 20px 0px";
 	mvImage.style.backgroundImage = "url(/resources/img/" + movie[0].mvImage + ")";
 	mvImage.style.backgroundSize = "contain";
@@ -95,14 +107,14 @@ function divClick(mvCode, date){
 	     
 	        for(let i=0; i<time.length; i++){
 	        	
-	     	let Gr = ((time[i].mvGrade=="A")? "전체이용가" :
-                	((time[i].mvGrade=="C")? "12세이용가" :
-                    ((time[i].mvGrade=="Y")? "15세이용가" : ("청소년관람불가"))));
-	    
+	       
+	     	let Gr = document.createElement("img");
+	        Gr.src = "/resources/img/"+ time[i].mvGrade+".jpg";
+	        timeList.appendChild(Gr);
 
-	     	let Ti = "상영시간: " + time[i].DATIME.substring(8,10)
-	     		+((time[i].DATIME.substring(11,12)==0)? "시" : ":")
-	     		+ ((time[i].DATIME.substring(11,12)==0)? "" :
+	     	let Ti = "상영시간> " + time[i].DATIME.substring(8,10)
+	     		+((time[i].DATIME.substring(11,12)==0)? ":" : ":")
+	     		+ ((time[i].DATIME.substring(10,12)==0)? "00" :
 	     			(time[i].DATIME.substring(10,12)));
 	     	
 	     	
@@ -113,12 +125,13 @@ function divClick(mvCode, date){
 	     	
 	     	let mvScreen = document.createElement('Div');
 
-	     	mvScreen.textContent = Gr +"["+time[i].mvSCREEN+"상영관] " + Ti;
+	     	mvScreen.textContent = "["+time[i].mvSCREEN+"상영관] " + Ti;
 	     	mvScreen.style.cursor="pointer";
 	     	mvScreen.addEventListener('click',function(){send(scData);});
 	     	mvScreen.className = "time";
 
 		    timeList.appendChild(mvScreen);
+		   
 		}
 		}
 	};
@@ -136,7 +149,7 @@ function divClick(mvCode, date){
 		   let step4 = scData.split(":");
 		   
 		   var form = document.createElement("form");
-		   form.action = "Step4?sCode=S4&mvCode="+step4[0]+"&mvSCREEN="+step4[1]+"&DATIME="+step4[2]+"&iCode=q";
+		   form.action = "Step4?mvThCode=1&sCode=S4&mvCode="+step4[0]+"&mvSCREEN="+step4[1]+"&DATIME="+step4[2]+"&iCode=q";
 		   form.method = "post";
 		   document.body.appendChild(form);
 		   

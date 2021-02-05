@@ -34,6 +34,23 @@
 	</select>
 	
 	
+	<select id="getSeat" resultType="icia.kotlin.beans.Seat"> 
+	<![CDATA[
+		SELECT IS_SEATNUM AS SEATNUM,
+           IS_TYPE AS SEATTYPE
+    FROM "IS"
+    WHERE IS_NUMBER = #{mvSCREEN}
+    UNION
+    SELECT RD.RD_SEATNUM AS SEATNUM,
+           RD.RD_TYPE AS SEATTYPE
+    FROM RD 
+    WHERE RD_RVCODE 
+    IN(SELECT RV_CODE FROM RV WHERE RV.RV_SISCNUMBER = #{mvSCREEN} AND 
+    	(TO_CHAR(RV.RV_SIDATIME,'YYYYMMDDHH24MI')) = #{DATIME})
+	]]>
+	</select>
+	
+	
 	
 	
 

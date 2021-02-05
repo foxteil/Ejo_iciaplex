@@ -19,6 +19,7 @@ import com.zaxxer.hikari.util.ConcurrentBag;
 
 import icia.kotlin.beans.Count;
 import icia.kotlin.beans.Movie;
+import icia.kotlin.beans.Seat;
 import icia.kotlin.mapper.MapperIF;
 import icia.kotlin.mapper.ReservationIF;
 
@@ -65,16 +66,19 @@ public class Reservation {
 			
 		}
 		 private ModelAndView Step4(Movie mv) {
-			 mv.setMvThCode("1");
 			 ModelAndView mav = new ModelAndView();
-			 System.out.println(mv.getMvSCREEN());
+			 System.out.println(mv);
 			
-			
-			 
 			 mav.addObject("Access", this.getCurrentDate('f'));
+			 mav.addObject("SeatInfo", gson.toJson(this.getSeat(mv)));
 			 mav.setViewName("step4");
 			return mav;
 		}
+		 
+		 private ArrayList<Seat> getSeat(Movie mv){
+			 System.out.println(reserve.getSeat(mv).size());
+			 return reserve.getSeat(mv);
+		 }
 		 
 		private ModelAndView Step3(Movie mv) {
 	         String screen = new String();

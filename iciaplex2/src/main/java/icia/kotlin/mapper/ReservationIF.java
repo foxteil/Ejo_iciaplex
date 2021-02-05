@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import icia.kotlin.beans.Count;
 import icia.kotlin.beans.Movie;
+import icia.kotlin.beans.Seat;
 
 
 public interface ReservationIF {
@@ -15,5 +16,7 @@ public interface ReservationIF {
 	public String getDate();
 	
 	public ArrayList<Movie> getScreen(Movie mv);
+	
+	public ArrayList<Seat> getSeat(Movie mv);
 
 }

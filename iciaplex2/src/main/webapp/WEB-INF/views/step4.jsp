@@ -11,5 +11,9 @@
 	<P>  Now Time : ${Access} </P>
 	<section id="seatZone">좌석 선택 페이지입니다.</section>
 </body>
-
+<script type="text/javascript">
+let seatInfo = ${SeatInfo };
+let seat = JSON.stringify(seatInfo);
+console.log(seat);
+</script>
 </html>
