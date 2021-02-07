@@ -109,7 +109,7 @@ color:#ffffff;
 
 	<a href="http://192.168.35.195/LogInform" >로그인폼 이동</a><br />
 	
-	<p> ${movieL }</p>
+	<section> ${movieL }</section>
 	<p>now time ${Access }</p>
 	<section id="movieZone"></section>
 </body>

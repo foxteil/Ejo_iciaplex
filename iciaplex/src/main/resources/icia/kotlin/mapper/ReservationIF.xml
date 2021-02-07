@@ -13,20 +13,13 @@
 	<select id="getMovieList" resultType="icia.kotlin.beans.Movie"> 
 	<![CDATA[
 		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E'
-	
-	
-	
-	]]>
+		]]>
 	</select>
 	
 	<select id="getMovieList2" resultType="icia.kotlin.beans.Movie"> 
 	<![CDATA[
 		SELECT mv_code AS mvCode,MV_NAME AS mvName, MV_GRADE AS mvGrade, MV_STATUS AS mvStatus, MV_IMAGE AS mvImage ,mv_comments AS mvComments FROM MV WHERE MV_STATUS !='E' 
 		 AND MV_CODE= #{mvCode}
-	
-	
-	
-	
 	]]>
 	</select>
 	<select id="getDate" resultType="String">
@@ -40,7 +33,21 @@
 	]]>
 	</select>
 	
-	
+	<select id="getSeat" resultType="icia.kotlin.beans.Seat"> 
+	<![CDATA[
+	SELECT IS_SEATNUM AS SEATNUM,
+           IS_TYPE AS SEATTYPE
+    FROM "IS"
+    WHERE IS_NUMBER = ${mvSCREEN}
+    UNION
+    SELECT RD.RD_SEATNUM AS SEATNUM,
+           RD.RD_TYPE AS SEATTYPE
+    FROM RD 
+    WHERE RD_RVCODE 
+    IN(SELECT RV_CODE FROM RV WHERE RV.RV_SISCNUMBER = ${mvSCREEN} AND 
+       (TO_CHAR(RV.RV_SIDATIME,'YYYYMMDDHH24MISS')) = ${mvDate})
+	]]>
+	</select>
 	
 	
 

@@ -36,7 +36,7 @@ public class Reservation {
 		
 		public ModelAndView entrance(Movie mv) {
 						
-			
+			System.out.println(mv);
 			switch (mv.getSCode()) {
 			case "H":
 				//mav=LogInCtl(m);
@@ -55,6 +55,16 @@ public class Reservation {
 				
 				mav=Step3(mv);
 				break;
+			case "S3a":
+				//mav=LogInCtl(m);
+				
+				mav=Step3a(mv);
+				break;
+			case "S4":
+				//mav=LogInCtl(m);
+				
+				mav=Step4(mv);
+				break;
 			
 			default :
 				
@@ -64,6 +74,34 @@ public class Reservation {
 			return mav;
 			
 		}
+		private ModelAndView Step3a(Movie mv) {
+			String screen = new String();
+			System.out.println(mv);
+			
+			mav.addObject("Access",this.getCurrentDate('f'));
+			mav.addObject("screen",screen);
+			
+			System.out.println("in Step3"+screen);
+			
+			mav.setViewName("step4");
+			
+			return mav;
+		}
+		private ModelAndView Step4(Movie mv) {
+			String step = null ;
+			
+			String date = getCurrentDate('f');
+						
+			mav.addObject("SeatInfo",gson.toJson(reserve.getSeat(mv)));
+			mav.addObject("Access",date);
+			
+			step="step4";
+			
+			mav.setViewName(step);
+			
+			return mav;
+		}
+		
 		private ModelAndView Step3(Movie mv) {
 			String screen = new String();
 			String add = new String();
@@ -71,44 +109,25 @@ public class Reservation {
 			add += "%";
 			mv.setMvDate(add);
 			System.out.println(mv);
-			
-			if(mv.getICode().equals("b")) {
-				screen = makeScreen(reserve.getScreen(mv));
-				
-				mav.addObject("screen",screen);
-				System.out.println("in Step3"+screen);
-				
-			}else if(mv.getICode().equals("j")) {
+		
 				String jsonData = gson.toJson(reserve.getScreen(mv));
 				System.out.println(jsonData);
 				mav.addObject("screen",jsonData);
-			}
+			
 			
 			mav.setViewName("screen");
 			
 		
 			return mav;
 		}
-		private String makeScreen(ArrayList<Movie> sc) {
-			StringBuffer sb = new StringBuffer();
-			for(int i =0;i<sc.size();i++) {
-				sb.append("<input type= \"text \" readOnly value=\" MVCODE:"+sc.get(i).getMvCode() +" \" > ");
-				sb.append("<input type= \"text \" readOnly value=\" MVNAME:"+sc.get(i).getMvName() +" \" > ");
-				sb.append("<input type= \"text \" readOnly value=\" MVGRADE:"+sc.get(i).getMvGrade() +" \" > ");
-				sb.append("<input type= \"text \" readOnly value=\" MVSCREEN:"+sc.get(i).getMvSCREEN() +" \" > ");
-				sb.append("<input type= \"text \" readOnly value=\" DATIME:"+sc.get(i).getDATIME()+" \" > ");
-			}
-			
-			
-			return sb.toString();
-		}
+
 		private ModelAndView Step2(Movie mv) {
 
 			if (mv.getICode().equals("b")) {
 				String poster = new String();
 				poster = makePoster(reserve.getMovieList2(mv), this.nextDate());
 				// String date = makeDate(this.nextDate());
-
+				
 				mav.addObject("poster", poster);
 				mav.setViewName("date");
 
@@ -160,9 +179,9 @@ public class Reservation {
 			sb.append("<div style=\"float: left\" >");
 			sb.append("<img src=resources/img/"+movieList2.get(0).getMvImage()+" style=\"width:30%\">");
 			sb.append("</div>");
-			sb.append("<div style=\"float: left \" >");
+			sb.append("<section>");
 			sb.append(makeDate(al));
-			sb.append("</div>");
+			sb.append("</section>");
 			sb.append("<br>");
 			sb.append("<button>"+movieList2.get(0).getMvGrade()+"</button>");
 			sb.append("<button>"+movieList2.get(0).getMvName()+"</button>");;

@@ -1,5 +1,7 @@
 package icia.kotlin.plex;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import icia.kotlin.beans.Member;
@@ -56,12 +59,28 @@ public class HomeController {
 		return mav=reserve.entrance(mv);
 	}
 	@RequestMapping(value="/Step3", method= { RequestMethod.POST})
-	public ModelAndView Step3(@ModelAttribute Movie mv) {
+	@ResponseBody
+	public String Step3(@ModelAttribute Movie mv) throws UnsupportedEncodingException {
 		ModelAndView mav =null;
-		mv.setSCode("S3");
+		System.out.println("스텝3 진입");
+		System.out.println(mv);
 		mav=reserve.entrance(mv);
-		System.out.println(mav.getModel().get("screen"));
-		return mav;
+		
+		return URLEncoder.encode(mav.getModel().get("screen").toString(), "UTF-8");
+	}
+	@RequestMapping(value="/Step3a", method= { RequestMethod.POST})
+	public ModelAndView Step3a(@ModelAttribute Movie mv) {
+		ModelAndView mav =null;
+		System.out.println(mv);
+		return mav=reserve.entrance(mv);
+	}
+	@RequestMapping(value="/Step4", method= { RequestMethod.POST})
+	public ModelAndView Step4(@ModelAttribute Movie mv) {
+		ModelAndView mav =null;
+		System.out.println(mv);
+		System.out.println(mv.getMvSCREEN());
+		System.out.println(mv.getICode());
+		return mav=reserve.entrance(mv);
 	}
 	
 	
