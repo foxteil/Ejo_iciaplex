@@ -47,11 +47,12 @@ function divClick(mvCode,date){
 			let jsonData = decodeURIComponent(request.response);
 
 			screening(jsonData);
+			alert(jsonData);
 			
 		}
 	};
 	
-	request.open("POST", "Step3", true);
+	request.open("POST", "Step3a", true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 	request.send("iCode=j&sCode=S3&mvCode="+mvCode+"&mvDate="+mvDate);
 }
