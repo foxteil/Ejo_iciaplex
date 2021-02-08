@@ -67,7 +67,7 @@ public class Reservation {
 		}
 		 private ModelAndView Step4(Movie mv) {
 			 ModelAndView mav = new ModelAndView();
-			 System.out.println(mv);
+			 System.out.println(mv.getDATIME());
 			
 			 mav.addObject("Access", this.getCurrentDate('f'));
 			 mav.addObject("SeatInfo", gson.toJson(this.getSeat(mv)));
