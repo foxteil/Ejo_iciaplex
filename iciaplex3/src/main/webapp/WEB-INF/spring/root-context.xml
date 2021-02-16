@@ -39,4 +39,11 @@
 		<mybatis-spring:scan base-package="icia.kotlin.mapper"/>
 		<!-- 인터페이가 있는 패키지를 경로로 잡아줘야 한다. -->
 		
+		<!-- Spring Mail -->
+<!-- 		<bean id="springMail" class="org.springframework.mail.javamail.JavaMailSenderImpl"> -->
+<!-- 			<property name="host" value="smtp.naver.com"/> -->
+<!-- 			<property name="port" value="465"/> -->
+<!-- 			<property name="username" value="britlove1246@naver.com"/> -->
+<!-- 			<property name="password" value="8318qwe!"/> -->
+<!-- 		</bean> -->
 </beans>

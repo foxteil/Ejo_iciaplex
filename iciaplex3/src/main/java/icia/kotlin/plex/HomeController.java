@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import icia.kotlin.beans.Mailbean;
 import icia.kotlin.beans.Member;
 import icia.kotlin.beans.Movie;
 import icia.kotlin.services.Authentication;
+import icia.kotlin.services.Mail;
 import icia.kotlin.services.Reservation;
 
 
@@ -30,6 +33,10 @@ public class HomeController {
 	private Reservation reserve;
 	@Autowired
 	private Authentication auth;
+	@Autowired
+	private JavaMailSenderImpl mail;
+	@Autowired
+	private Mail mailService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -49,7 +56,36 @@ public class HomeController {
 		
 		return mav;
 	}
+	
 
+
+	@RequestMapping(value="/MailForm", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView MailForm(@ModelAttribute Mailbean mail) {
+		ModelAndView mav = new ModelAndView();
+		
+		//System.out.println(mail.getMailContent());
+		
+		mav.setViewName("mail");		
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="/SendMail", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView SendMail(@ModelAttribute Mailbean sendMail) {
+		ModelAndView mav = new ModelAndView();
+		
+		//System.out.println(mail.getMailContent());
+		
+		//mav = mail.entrance(sendMail);	
+		
+		return mailService.entrance(sendMail);
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/Step2", method= { RequestMethod.POST})
 	public ModelAndView Step2(@ModelAttribute Movie mv) {
 		ModelAndView mav =null;
