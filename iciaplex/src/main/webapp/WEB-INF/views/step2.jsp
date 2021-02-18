@@ -103,8 +103,7 @@ function screening(jsonData){
 				  ((screen[i].mvGrade == "Y" )? "15세이용가" : "청소년관람불가")));
 	
 		let Ti = screen[i].DATIME.substring(8,10)
-				+ ((screen[i].DATIME.substring(11,12)==0)? "시" : ":")
-				 + ((screen[i].DATIME.substring(11,12)==0)? " " : screen[i].DATIME.substring(10,12));
+				+ ":"+ screen[i].DATIME.substring(10,12);
 		
 		let scData = screen[i].mvCode +":"
 			+ screen[i].mvSCREEN+":"
@@ -121,7 +120,7 @@ function screening(jsonData){
 	
 }
 function send(scData){
-	alert(scData);
+
 	let step2 = scData.split(":");
 	
 	var form = document.createElement("form");

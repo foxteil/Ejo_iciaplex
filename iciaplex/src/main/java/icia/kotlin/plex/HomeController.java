@@ -1,26 +1,30 @@
 package icia.kotlin.plex;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
+
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import icia.kotlin.beans.Member;
+import icia.kotlin.beans.ApiElement;
+import icia.kotlin.beans.MailBean;
 import icia.kotlin.beans.Movie;
-import icia.kotlin.services.Authentication;
+import icia.kotlin.services.APITEST;
+import icia.kotlin.services.Mail;
 import icia.kotlin.services.Reservation;
 
 
@@ -29,7 +33,10 @@ public class HomeController {
 	@Autowired
 	private Reservation reserve;
 	@Autowired
-	private Authentication auth;
+	private Mail mail;
+	@Autowired
+	private APITEST api;
+
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -45,7 +52,7 @@ public class HomeController {
 	@RequestMapping(value="/LogInform", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView logInForm() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("loginForm");		
+		mav.setViewName("practice");		
 		
 		return mav;
 	}
@@ -82,6 +89,34 @@ public class HomeController {
 		System.out.println(mv.getMvSCREEN());
 		System.out.println(mv.getICode());
 		return mav=reserve.entrance(mv);
+	}
+	
+	@RequestMapping(value="/SendMail", method= { RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView SendMail(@ModelAttribute MailBean ml) {
+		ModelAndView mav =new ModelAndView();
+
+		System.out.println("메일테스트");
+		
+		mav=mail.entrance(ml);
+
+		return mav;
+	}
+	
+	@RequestMapping(value="/MailForm", method= { RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView MailForm() {
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("mail");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/APItest", method= { RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView APItest(ApiElement apie) throws IOException {
+		ModelAndView mav =new ModelAndView();
+		
+		mav = api.entrance(apie);
+		
+		return mav;
 	}
 	
 	

@@ -65,7 +65,8 @@ public class Reservation {
 				
 				mav=Step4(mv);
 				break;
-			
+
+				
 			default :
 				
 				break;
@@ -74,6 +75,7 @@ public class Reservation {
 			return mav;
 			
 		}
+
 		private ModelAndView Step3a(Movie mv) {
 			String screen = new String();
 			System.out.println(mv);
@@ -94,7 +96,8 @@ public class Reservation {
 						
 			mav.addObject("SeatInfo",gson.toJson(reserve.getSeat(mv)));
 			mav.addObject("Access",date);
-			
+			String a = gson.toJson(reserve.getSeat(mv));
+			System.out.println(a);
 			step="step4";
 			
 			mav.setViewName(step);
@@ -117,7 +120,7 @@ public class Reservation {
 			
 			mav.setViewName("screen");
 			
-		
+	
 			return mav;
 		}
 

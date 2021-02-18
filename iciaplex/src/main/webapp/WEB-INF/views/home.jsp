@@ -109,6 +109,27 @@ color:#ffffff;
 
 	<a href="http://192.168.35.195/LogInform" >로그인폼 이동</a><br />
 	
+	<h1>api_map 테스트입니다.</h1>
+
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b84a09be13d43f46874d3194cfb7ae0"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b84a09be13d43f46874d3194cfb7ae0&libraries=LIBRARY"></script>
+	<!-- services 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b84a09be13d43f46874d3194cfb7ae0&libraries=services"></script>
+	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b84a09be13d43f46874d3194cfb7ae0&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 2
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
+	
+	
+	
 	<section> ${movieL }</section>
 	<p>now time ${Access }</p>
 	<section id="movieZone"></section>

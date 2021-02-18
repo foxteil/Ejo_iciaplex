@@ -15,4 +15,5 @@ public class Movie {
 	private String mvDate;
 	private String DATIME;
 	private String mvSCREEN;
+	private String seatNum;
 }
